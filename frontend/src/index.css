@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #070c1b;
+    color: #f1f5f9;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0d1526;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e3a5f;
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-navy-800 border border-white/[0.07] rounded-2xl;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl
+           transition-all duration-200 flex items-center gap-2 disabled:opacity-50
+           disabled:cursor-not-allowed active:scale-[0.98];
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    box-shadow: 0 0 28px rgba(59, 130, 246, 0.5);
+  }
+
+  .input-field {
+    @apply w-full bg-navy-900 border border-white/[0.1] rounded-xl px-4 py-3
+           text-slate-100 placeholder-slate-500 outline-none
+           focus:border-blue-500/60 focus:ring-2 focus:ring-blue-500/20
+           transition-all duration-200;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide;
+  }
+
+  .badge-buy    { @apply bg-emerald-500/20 text-emerald-400 border border-emerald-500/30; }
+  .badge-hold   { @apply bg-amber-500/20 text-amber-400 border border-amber-500/30; }
+  .badge-sell   { @apply bg-red-500/20 text-red-400 border border-red-500/30; }
+  .badge-pos    { @apply bg-emerald-500/15 text-emerald-400 border border-emerald-500/25; }
+  .badge-neu    { @apply bg-slate-500/20 text-slate-400 border border-slate-500/30; }
+  .badge-neg    { @apply bg-red-500/15 text-red-400 border border-red-500/25; }
+  .badge-low    { @apply bg-emerald-500/15 text-emerald-400 border border-emerald-500/25; }
+  .badge-mod    { @apply bg-amber-500/15 text-amber-400 border border-amber-500/25; }
+  .badge-high   { @apply bg-red-500/15 text-red-400 border border-red-500/25; }
+}
+
+/* Markdown report styles */
+.report-prose h1, .report-prose h2 {
+  @apply text-blue-400 font-bold mt-8 mb-3 pb-2 border-b border-white/[0.08];
+}
+.report-prose h2 { @apply text-lg; }
+.report-prose h3 { @apply text-slate-200 font-semibold mt-5 mb-2; }
+.report-prose p  { @apply text-slate-300 leading-relaxed mb-3; }
+.report-prose ul { @apply text-slate-300 space-y-1.5 mb-4 pl-2; }
+.report-prose ul li { @apply flex gap-2 items-start; }
+.report-prose ul li::before { content: "•"; @apply text-blue-400 mt-0.5 shrink-0; }
+.report-prose strong { @apply text-slate-100 font-semibold; }
+.report-prose table {
+  @apply w-full text-sm mb-4 border-collapse;
+}
+.report-prose th {
+  @apply bg-navy-700 text-slate-300 font-semibold px-4 py-2 text-left border border-white/[0.08];
+}
+.report-prose td {
+  @apply px-4 py-2 border border-white/[0.06] text-slate-300;
+}
+.report-prose tr:nth-child(even) td {
+  @apply bg-white/[0.02];
+}
+.report-prose code {
+  @apply bg-navy-900 text-blue-300 px-1.5 py-0.5 rounded text-xs;
+}
+.report-prose blockquote {
+  @apply border-l-4 border-blue-500/50 pl-4 text-slate-400 italic my-4;
+}

@@ -1,0 +1,63 @@
+name: Deploy backend to HuggingFace Spaces
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"          # auto-trigger when backend files change
+  workflow_dispatch:          # allows manual trigger from GitHub Actions UI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install huggingface_hub
+        run: pip install huggingface_hub
+
+      - name: Verify HF_TOKEN secret is set
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "ERROR: HF_TOKEN secret is empty or not set."
+            echo "Go to: https://github.com/urmitmahida34/finsight-ai-agent/settings/secrets/actions"
+            echo "Add a secret named exactly: HF_TOKEN"
+            exit 1
+          fi
+          echo "HF_TOKEN is set (length: ${#HF_TOKEN} chars)"
+
+      - name: Upload backend to HuggingFace Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python - <<'PYEOF'
+          import os
+          import sys
+          from huggingface_hub import HfApi
+
+          token = os.environ.get("HF_TOKEN", "").strip()
+          if not token:
+              print("ERROR: HF_TOKEN is empty inside Python")
+              sys.exit(1)
+
+          print(f"Token length: {len(token)} chars, starts with: {token[:5]}...")
+          api = HfApi(token=token)
+          api.upload_folder(
+              folder_path="backend",
+              repo_id="urmitmahida/financial-analysis-agent",
+              repo_type="space",
+              commit_message="Deploy from GitHub: ${{ github.sha }}",
+              ignore_patterns=[
+                  "data/analysis_cache/*",
+                  "data/rbi_circulars/*.pdf",
+                  "data/rbi_circulars/*.pkl",
+                  "__pycache__",
+                  "*.pyc",
+              ],
+          )
+          print("Deployed successfully to HuggingFace Spaces!")
+          PYEOF

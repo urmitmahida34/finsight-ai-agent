@@ -1,0 +1,30 @@
+fastapi>=0.115.0
+uvicorn[standard]>=0.31.1
+sse-starlette>=2.1.0
+python-multipart>=0.0.9
+python-dotenv>=1.1.1,<2.0.0
+
+# Agent framework — pinned to match local Anaconda version exactly
+crewai==1.9.3
+
+# LLM routing — litellm routes groq/... prefixed models
+litellm>=1.40.0
+google-genai>=0.8.0
+
+# Stock data
+yfinance==0.2.48
+pandas>=2.2.0
+numpy>=1.26.0
+
+# News search (renamed from duckduckgo-search)
+ddgs>=6.3.7
+
+# RAG / Vector search
+faiss-cpu>=1.9.0
+PyPDF2>=3.0.1
+
+# PDF export
+fpdf2>=2.8.1
+
+# Utilities
+requests>=2.32.0

@@ -1,0 +1,42 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Claude Code context (local dev only)
+CLAUDE.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/build/
+.pnp
+.pnp.js
+
+# FAISS index (rebuild from PDFs)
+backend/data/rbi_circulars/*.pkl
+backend/data/rbi_circulars/*.pdf
+
+# Analysis cache (LLM outputs, keyed by ticker+date — never commit)
+backend/data/analysis_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
