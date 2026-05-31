@@ -230,8 +230,3 @@ The project auto-deploys via GitHub Actions:
 - **Backend**: Push to `main` → GitHub Actions syncs `backend/` to HuggingFace Spaces → Docker rebuild
 - **Frontend**: Connect repo to Vercel → set root to `frontend/` → auto-deploys on push
 
----
-
-## License
-
-MIT
